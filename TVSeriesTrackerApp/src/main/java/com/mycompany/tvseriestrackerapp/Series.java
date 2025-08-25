@@ -16,6 +16,8 @@ public class Series {
     private String SeriesName;
     private String SeriesAge;
     private String SeriesNumberOfEpisodes;
+    
+    
     public void CaptureSeries(){
         System.out.print("Enter the series id: ");
         SeriesId=UserInput.next();
@@ -41,5 +43,9 @@ public class Series {
                System.out.print("Please re-enter the series age >> ");
             }   
         }
+    }
+    
+    public void SearchSeries() {
+        
     }
 }
