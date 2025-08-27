@@ -11,6 +11,7 @@ package com.mycompany.tvseriestrackerapp;
 public class TVSeriesTrackerApp {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Series app = new Series();
+        app.CaptureSeries();
     }
 }

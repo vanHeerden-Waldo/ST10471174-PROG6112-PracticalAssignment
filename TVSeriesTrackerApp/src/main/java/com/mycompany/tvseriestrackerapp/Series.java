@@ -25,27 +25,35 @@ public class Series {
         System.out.print("Enter the series name: ");
         SeriesName=UserInput.next();
        
-        System.out.print("Enter the series age restriction: ");       
-        while (true) {           
-            if (UserInput.hasNextInt()) {
-                int Age = UserInput.nextInt();
+        System.out.print("Enter the series age restriction: "); 
+        boolean AgeValid =false;
+        while (AgeValid == false) {           
+            int Age;
+            if (UserInput.hasNextInt() == true) {
+                Age = UserInput.nextInt();
                 UserInput.nextLine();
                 if (Age >= 2 && Age<=18) {
                     SeriesAge=String.valueOf(Age);
-                    break;
+                    AgeValid=true;
                 } else {
                     System.out.println("You have entered a incorrect series age!!!");
                     System.out.print("Please re-enter the series age >> ");
                     Age=UserInput.nextInt();
                 }
-            } else {
+            } else { 
                System.out.println("You have entered a incorrect series age!!!");
                System.out.print("Please re-enter the series age >> ");
+               UserInput.nextLine();
             }   
         }
+        
+        System.out.print("Enter the number of episodes for " + SeriesName +": ");
+        SeriesNumberOfEpisodes=UserInput.next();
+        
+        System.out.println("Series processed successfully!!!");
     }
     
     public void SearchSeries() {
-        
+        System.out.println("Enter the series id to search: ");
     }
 }
