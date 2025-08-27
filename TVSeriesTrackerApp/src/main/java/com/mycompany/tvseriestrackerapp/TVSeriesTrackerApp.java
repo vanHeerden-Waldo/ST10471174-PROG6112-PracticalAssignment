@@ -36,6 +36,7 @@ public class TVSeriesTrackerApp {
                         User_1.CaptureSeries();
                         break;
                     case '2':
+                        
                         User_1.SearchSeries();
                         break;
                     case '3':
