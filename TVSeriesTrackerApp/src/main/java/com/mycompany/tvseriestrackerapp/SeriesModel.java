@@ -13,4 +13,11 @@ public class SeriesModel {
     public String SeriesName;
     public String SeriesAge;
     public String SeriesNumberOfEpisodes;
+    
+    public SeriesModel(String SeriesID, String SeriesName, String SeriesAge, String SeriesNumberOfEpisodes){
+        SeriesId=SeriesID;
+        this.SeriesName = SeriesName;
+        this.SeriesAge=SeriesAge;
+        this.SeriesNumberOfEpisodes=SeriesNumberOfEpisodes;
+    }
 }
