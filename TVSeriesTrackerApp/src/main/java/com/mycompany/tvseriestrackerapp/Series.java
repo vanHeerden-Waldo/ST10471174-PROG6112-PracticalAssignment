@@ -17,7 +17,7 @@ public class Series {
     private String SeriesAge;
     private String SeriesNumberOfEpisodes;
     private ArrayList<SeriesModel> TVSeriesList = new ArrayList<>();
-    SeriesModel NewSeries = new SeriesModel(SeriesId, SeriesName, SeriesAge, SeriesNumberOfEpisodes);
+    
     
     public boolean ValidateAge(int Age){
         boolean AgeValid;                          
@@ -31,15 +31,16 @@ public class Series {
     }
     
     public void CaptureSeries(){
-        
+        SeriesModel NewSeries = new SeriesModel(SeriesId, SeriesName, SeriesAge, SeriesNumberOfEpisodes);
         
         System.out.print("Enter the series id: ");
         SeriesId=UserInput.next();
         
-        System.out.print("Enter the series name: ");
-        SeriesName=UserInput.next();
-       
         UserInput.nextLine();
+        
+        System.out.print("Enter the series name: ");
+        SeriesName=UserInput.nextLine();
+       
         System.out.print("Enter the series age restriction: "); 
         boolean AgeValid =false;
         while (AgeValid == false) {           
@@ -107,7 +108,7 @@ public class Series {
                 
                 System.out.print("Enter the series name: ");
                 s.SeriesName=UserInput.next();
-                
+                UserInput.nextLine();
                 System.out.print("Enter the age restriction: ");
                 boolean AgeValid =false;
                 while (AgeValid == false) {           
@@ -147,14 +148,43 @@ public class Series {
         boolean SeriesToDeleteFound = false;
         
         
-        
-        for (SeriesModel s : TVSeriesList) {
-            if (s.SeriesId.equalsIgnoreCase(DeleteSeriesID) == true) {
-                TVSeriesList.remove(s);
-                System.out.println("Series with Series Id: " + DeleteSeriesID + " WAS deleted!");
-                SeriesToDeleteFound=true;
-                break;
+        if (confirmationDelete == 'y' || confirmationDelete == 'Y') {
+            for (SeriesModel s : TVSeriesList) {
+                if (s.SeriesId.equalsIgnoreCase(DeleteSeriesID) == true) {
+                    TVSeriesList.remove(s);
+                    System.out.println("Series with Series Id: " + DeleteSeriesID + " WAS deleted!");
+                    SeriesToDeleteFound=true;
+                    break;
+                }
+            }
+            if (SeriesToDeleteFound == false) {
+                System.out.println("No series found with the ID: " + DeleteSeriesID);
+            }
+        } else {
+            System.out.println("Series deletion cancelled.");
+        }
+    }
+    
+    public void SeriesReport() {
+        if (TVSeriesList.isEmpty() == true) {
+            System.out.println("No series is currently stored.");
+        } else {
+            int i=0;
+            for (SeriesModel s : TVSeriesList) {
+                i++;
+                System.out.println("Series " + i);
+                System.out.println("-----------------------------");
+                System.out.println("SERIES ID: " + s.SeriesId);
+                System.out.println("SERIES NAME: " + s.SeriesName);
+                System.out.println("SERIES AGE RESTRICTION: " + s.SeriesAge);
+                System.out.println("NUMBER OF EPISODES: " + s.SeriesNumberOfEpisodes);
+                System.out.println("-----------------------------");
             }
         }
+    }
+    
+    public void ExitSeriesApplication() {
+        System.out.println("Closing the application");
+        System.exit(0);
     }
 }
