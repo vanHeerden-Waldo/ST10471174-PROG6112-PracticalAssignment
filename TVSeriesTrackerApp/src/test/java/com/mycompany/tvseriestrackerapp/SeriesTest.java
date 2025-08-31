@@ -39,17 +39,32 @@ public class SeriesTest {
      * Test of SearchSeries method, of class Series.
      */
     @Test
-    public void testSearchSeries() {
-        
-        User1.SearchSeries();
-        
+    public void TestSearchSeries() {
+        User1.CaptureSeries("1", "The Rangers", 18, "20");
+        String Result = User1.SearchSeries("1");
+        String Expected = "----------------------------\nSERIES ID: 1\nSERIES NAME: The Rangers\nSERIES AGE RESTRICTION: 18\nSERIES NUMBER OF EPISODES: 20\n----------------------------";
+        assertEquals(Expected, Result);
+    }
+    
+    /*
+     Test of SearchSeries Method, of class Series
+    */
+    @Test
+    public void TestSearchSeries_SeriesNotFound() {
+        User1.CaptureSeries("1", "The Rangers", 18, "20");
+        String Result = User1.SearchSeries("2");
+        String Expected = "----------------------------\nSeries with Series Id: 2 was not found!\n----------------------------";
+        assertEquals(Expected, Result);
     }
 
     /**
      * Test of UpdateSeries method, of class Series.
      */
     @Test
-    public void testUpdateSeries() {
+    public void TestUpdateSeries() {
+       User1.CaptureSeries("1", "The Park Rangers", 15, "10");
+       boolean Result = User1.UpdateSeries("1", "The Rangers", 18, "20");
+       assertTrue(Result);
     }
 
     /**
@@ -57,20 +72,20 @@ public class SeriesTest {
      */
     @Test
     public void testDeleteSeries() {
+       User1.CaptureSeries("1", "The Rangers", 18, "20");
+       boolean Result = User1.DeleteSeries("1");
+       assertTrue(Result);
     }
 
     /**
-     * Test of SeriesReport method, of class Series.
+     * Test of DeleteSeries method, of class Series.
      */
     @Test
-    public void testSeriesReport() {
+    public void TestDeleteSeries_SeriesNotFound() {
+        User1.CaptureSeries("1", "The Rangers", 18, "20");
+        boolean Result = User1.DeleteSeries("2");
+        assertFalse(Result);
     }
 
-    /**
-     * Test of ExitSeriesApplication method, of class Series.
-     */
-    @Test
-    public void testExitSeriesApplication() {
-    }
     
 }

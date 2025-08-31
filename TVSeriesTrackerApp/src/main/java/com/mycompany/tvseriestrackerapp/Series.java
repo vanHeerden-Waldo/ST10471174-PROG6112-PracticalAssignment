@@ -11,18 +11,14 @@ package com.mycompany.tvseriestrackerapp;
 import java.util.*;
 
 public class Series {
-    Scanner UserInput = new Scanner(System.in);
-    private String SeriesId;
-    private String SeriesName;
-    private String SeriesAge;
-    private String SeriesNumberOfEpisodes;
+    //Scanner UserInput = new Scanner(System.in);
+
     private ArrayList<SeriesModel> TVSeriesList = new ArrayList<>();
     
     
     public boolean ValidateAge(int Age){
         boolean AgeValid;                          
         if (Age >= 2 && Age<=18) {
-            SeriesAge=String.valueOf(Age);
             AgeValid=true;
             } else {
                 AgeValid=false;
@@ -30,10 +26,19 @@ public class Series {
         return AgeValid;  
     }
     
-    public void CaptureSeries(){
-        SeriesModel NewSeries = new SeriesModel(SeriesId, SeriesName, SeriesAge, SeriesNumberOfEpisodes);
+    public boolean CaptureSeries(String ID, String Name, int Age, String Episodes){
+        //SeriesModel NewSeries = new SeriesModel(SeriesId, SeriesName, SeriesAge, SeriesNumberOfEpisodes);
+        boolean SeriesAdded = false;
+            if (!ValidateAge(Age)) {
+                SeriesAdded=false;
+            } else {
+                SeriesModel newSeries = new SeriesModel(ID, Name, String.valueOf(Age), Episodes);
+                TVSeriesList.add(newSeries);
+                SeriesAdded=true;
+            }  
+        return SeriesAdded;
         
-        System.out.print("Enter the series id: ");
+        /*System.out.print("Enter the series id: ");
         SeriesId=UserInput.next();
         
         UserInput.nextLine();
@@ -70,34 +75,54 @@ public class Series {
         NewSeries.SeriesName=this.SeriesName;
         NewSeries.SeriesAge=this.SeriesAge;
         NewSeries.SeriesNumberOfEpisodes=this.SeriesNumberOfEpisodes;
-        TVSeriesList.add(NewSeries);
+        TVSeriesList.add(NewSeries);*/
     }
     
-    public void SearchSeries() {
-        System.out.println("Enter the series id to search: ");
-        String SearchSeriesID = UserInput.next();
-        System.out.println("----------------------------");
+    public String SearchSeries(String SearchSeriesID) {
+        StringBuilder SeriesSearch = new StringBuilder();
+        String SearchSeries;
+        
+        SeriesSearch.append("----------------------------");
         
         boolean SeriesIDFound = false;
         
         for (SeriesModel s : TVSeriesList) {
             if (s.SeriesId.equalsIgnoreCase(SearchSeriesID)) {
-                System.out.println("SERIES ID: " + s.SeriesId);
-                System.out.println("SERIES NAME: " + s.SeriesName);
-                System.out.println("SERIES AGE RESTRICTION: " + s.SeriesAge);
-                System.out.println("SERIES NUMBER OF EPISODES: " + s.SeriesNumberOfEpisodes);
+                SeriesSearch.append("\nSERIES ID: " + s.SeriesId);
+                SeriesSearch.append("\nSERIES NAME: " + s.SeriesName);
+                SeriesSearch.append("\nSERIES AGE RESTRICTION: " + s.SeriesAge);
+                SeriesSearch.append("\nSERIES NUMBER OF EPISODES: " + s.SeriesNumberOfEpisodes);
                 SeriesIDFound=true;
                 break;
             }
         }
         if (SeriesIDFound==false) {
-            System.out.println("Series with Series Id: " + SearchSeriesID + " was not found!");
+            SeriesSearch.append("\nSeries with Series Id: " + SearchSeriesID + " was not found!");
         }
-        System.out.println("----------------------------");
+        SeriesSearch.append("\n----------------------------");
+        
+        SearchSeries = SeriesSearch.toString();
+        return SearchSeries;
     }
     
-    public void UpdateSeries() {
-        System.out.print("Enter the series id to update: ");
+    public boolean UpdateSeries(String UpdateSeriesID, String NewSeriesName, int NewAge, String NewNumberOfEpisodes) {
+        boolean SeriesUpdated = false;
+        for (SeriesModel s : TVSeriesList) {
+            if (s.SeriesId.equalsIgnoreCase(UpdateSeriesID)) {
+                if (!ValidateAge(NewAge)) {
+                    SeriesUpdated=false;
+                    break;
+                } else {
+                s.SeriesName = NewSeriesName;
+                s.SeriesAge = String.valueOf(NewAge);
+                s.SeriesNumberOfEpisodes = NewNumberOfEpisodes;
+                SeriesUpdated = true;
+                }
+            }
+        }
+        return SeriesUpdated;
+        
+        /*System.out.print("Enter the series id to update: ");
         String UpdateSeriesID = UserInput.next();
         
         boolean SeriesIDFound = false;
@@ -135,11 +160,20 @@ public class Series {
         }
         if (SeriesIDFound==false){
             System.out.println("Series with series id: " + UpdateSeriesID + " was not found!");
-        }
+        }*/
     }
     
-    public void DeleteSeries(){
-        System.out.print("Enter the series id to delete: ");
+    public boolean DeleteSeries(String DeleteSeriesID){
+        boolean SeriesDeleted = false;
+        for (SeriesModel s : TVSeriesList) {
+            if (s.SeriesId.equalsIgnoreCase(DeleteSeriesID)) {
+                TVSeriesList.remove(s);
+                SeriesDeleted=true;
+                break;
+            }
+        }    
+        return SeriesDeleted;
+        /*System.out.print("Enter the series id to delete: ");
         String DeleteSeriesID = UserInput.next();
         System.out.println("Are you sure you want to delete series " + DeleteSeriesID + " from the system? Yes (y) to delete.");
         String ConfirmationDelete = UserInput.next();
@@ -162,25 +196,29 @@ public class Series {
             }
         } else {
             System.out.println("Series deletion cancelled.");
-        }
+        }*/
     }
     
-    public void SeriesReport() {
+    public String SeriesReport() {
+        StringBuilder  SeriesReport = new StringBuilder();
+        String seriesReport = null;
         if (TVSeriesList.isEmpty() == true) {
-            System.out.println("No series is currently stored.");
+            SeriesReport.append("No series is currently stored.");
         } else {
             int i=0;
             for (SeriesModel s : TVSeriesList) {
                 i++;
-                System.out.println("Series " + i);
-                System.out.println("-----------------------------");
-                System.out.println("SERIES ID: " + s.SeriesId);
-                System.out.println("SERIES NAME: " + s.SeriesName);
-                System.out.println("SERIES AGE RESTRICTION: " + s.SeriesAge);
-                System.out.println("NUMBER OF EPISODES: " + s.SeriesNumberOfEpisodes);
-                System.out.println("-----------------------------");
+                SeriesReport.append("\nSeries " + i);
+                SeriesReport.append("\n-----------------------------");
+                SeriesReport.append("\nSERIES ID: " + s.SeriesId);
+                SeriesReport.append("\nSERIES NAME: " + s.SeriesName);
+                SeriesReport.append("\nSERIES AGE RESTRICTION: " + s.SeriesAge);
+                SeriesReport.append("\nNUMBER OF EPISODES: " + s.SeriesNumberOfEpisodes);
+                SeriesReport.append("\n-----------------------------");
             }
         }
+        seriesReport = SeriesReport.toString();
+        return seriesReport;
     }
     
     public void ExitSeriesApplication() {
