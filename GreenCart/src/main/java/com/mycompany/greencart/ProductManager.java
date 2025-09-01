@@ -126,16 +126,24 @@ public class ProductManager {
    public String DisplayProductCatalog(){
        StringBuilder  productDetails = new StringBuilder();
         String ProductList = null;
+        productDetails.append("\n---------------------------------");
         if (ProductCatalog.isEmpty() == true) {
             productDetails.append("No product has been added.");
         } else {
             int ProductCount=0;
-            int RefburbishedProductCount = 0;
+            int RefurbishedProductCount = 0;
             for (Product ProductDetails: ProductCatalog) {
                 if (ProductDetails instanceof RefurbishedProduct){
-                    
+                    RefurbishedProductCount++;
+                    RefurbishedProduct RefurbishedProductDetails = (RefurbishedProduct) ProductDetails;
+                    productDetails.append("\nRefurbished Product " + RefurbishedProductCount);
+                    productDetails.append("\n---------------------------------");
+                    productDetails.append(RefurbishedProductDetails.DisplayProductDetails());
                 } else {
-                    
+                    ProductCount++;
+                    productDetails.append("\nProduct " + ProductCount);
+                    productDetails.append("\n---------------------------------");
+                    productDetails.append(ProductDetails.DisplayProductDetails());
                 }
             }
 
@@ -143,5 +151,13 @@ public class ProductManager {
         ProductList = productDetails.toString();
         return ProductList;
     }
-   }
+   
+   /*public String DisplayEnvironmentallyFriendlyProducts(){
+       StringBuilder ProductInfo = new StringBuilder();
+       String ProductList;
+       ProductInfo.append("\n---------------------------------");
+       
+   }*/
+   
+   
 }

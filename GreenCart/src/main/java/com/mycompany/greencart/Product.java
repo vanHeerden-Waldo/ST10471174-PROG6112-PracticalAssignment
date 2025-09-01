@@ -64,11 +64,11 @@ public class Product {
         StringBuilder ProductInfo = new StringBuilder();
         String ProductDetails = null;
         
-        ProductInfo.append("Product ID: " + ProductID);
-        ProductInfo.append("Product Name: " + ProductName);
-        ProductInfo.append("Product Category: " + ProductCategory);
-        ProductInfo.append("Product Price: R" + ProductPrice);
-        ProductInfo.append("Product's Environmental Score: " + EnvironmentalScore);
+        ProductInfo.append("\nProduct ID: " + ProductID);
+        ProductInfo.append("\nProduct Name: " + ProductName);
+        ProductInfo.append("\nProduct Category: " + ProductCategory);
+        ProductInfo.append("\nProduct Price: R" + ProductPrice);
+        ProductInfo.append("\nProduct's Environmental Score: " + EnvironmentalScore);
         
         ProductDetails=ProductInfo.toString();
         return ProductDetails;

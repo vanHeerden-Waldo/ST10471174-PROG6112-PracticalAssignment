@@ -39,23 +39,24 @@ public class RefurbishedProduct extends Product {
         StringBuilder ProductInfo = new StringBuilder();
         String ProductDetails = null;
         
-        ProductInfo.append("Product ID: " + getProductID());
-        ProductInfo.append("Product Name: " + getProductName());
-        ProductInfo.append("Product Category: " + getProductCategory());
-        ProductInfo.append("Product Price: R" + getProductPrice());
-        ProductInfo.append("Product's Environmental Score: " + getEnvironmentalScore());
-        ProductInfo.append("Age of the Product: " + ProductAge + " years old");
+        ProductInfo.append("\nRefurbished Product ID: " + getProductID());
+        ProductInfo.append("\nRefurbished Product Name: " + getProductName());
+        ProductInfo.append("\nRefurbished Product Category: " + getProductCategory());
+        ProductInfo.append("\nRefurbished Product Price: R" + getProductPrice());
+        ProductInfo.append("\nRefurbished Product's Environmental Score: " + getEnvironmentalScore());
+        ProductInfo.append("\nAge of the Refurbished Product: " + ProductAge + " years old");
         switch (ProductQuality) {
             case 'B':
-                ProductInfo.append("Condition of Product: Bad");
+                ProductInfo.append("\nCondition of Refurbished Product: Bad");
                 break;
             case 'G':
-                ProductInfo.append("Condition of Product: Good");
+                ProductInfo.append("\nCondition of Refurbished Product: Good");
                 break;
             case 'N':
-                ProductInfo.append("Condition of Product: Like New");
+                ProductInfo.append("\nCondition of Refurbished Product: Like New");
                 break;
         }
+        ProductInfo.append("\n---------------------------------");
         
         ProductDetails=ProductInfo.toString();
         return ProductDetails;
