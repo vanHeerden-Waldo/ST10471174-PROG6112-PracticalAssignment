@@ -10,6 +10,7 @@ import java.util.*;
  */
 public class ProductManager {
     ArrayList<Product> ProductCatalog = new ArrayList<>(); //Declares an arraylist of Product named ProductCatalog where all of the different products will be stored in
+    ArrayList<Integer> Cart = new ArrayList<>();
     
     public boolean ValidateProductQuality(char ProductQuality){ //Validates whether the product quality value entered was valid or not. It must be either bad (B), Good (G) or Like New (N) 
         boolean ProductQualityValid = false;
@@ -52,12 +53,12 @@ public class ProductManager {
         return Message;
     }
     
-    public String SearchProductCatalog(String productName){
+    public String SearchProductCatalog(int ProductID){
         String ProductDetails = null;
         boolean ProductFound =false;
         
         for (Product ProductSearch: ProductCatalog) {
-            if (ProductSearch.getProductName().equalsIgnoreCase(productName) == true){
+            if (ProductSearch.getProductID() == ProductID){
                 ProductDetails = ProductSearch.DisplayProductDetails();
                 ProductFound=true;
                 break;
@@ -151,13 +152,52 @@ public class ProductManager {
         ProductList = productDetails.toString();
         return ProductList;
     }
-   
-   /*public String DisplayEnvironmentallyFriendlyProducts(){
-       StringBuilder ProductInfo = new StringBuilder();
-       String ProductList;
-       ProductInfo.append("\n---------------------------------");
-       
-   }*/
-   
+
+public boolean AddToCart(String ProductID) {
+    boolean ProductAdded = false;
+    for (Product ProductDetails: ProductCatalog) {
+        if (ProductDetails instanceof RefurbishedProduct) {
+            RefurbishedProduct RefurbishedProductDetails = (RefurbishedProduct) ProductDetails;
+            if (RefurbishedProductDetails.getProductID() == ProductID) {
+                Cart.add(ProductID);
+                ProductAdded=true;
+            }
+        } else {
+            if (ProductDetails.getProductID() == ProductID) {
+                Cart.add(ProductID);
+                ProductAdded=true;
+            }
+        }
+    }
+    return ProductAdded;
+}
+    
+public String ViewCart() {
+    StringBuilder ListCart = new StringBuilder();
+    String CartList = null;
+    int Count = 0;
+    
+    if (!Cart.isEmpty()) {
+        while (Count<Cart.size()) {
+            ListCart.append(SearchProductCatalog(Cart.get(Count)));
+            Count++;
+        }
+    } else {
+        ListCart.append("Your cart is currently empty.");
+    }
+
+    CartList=ListCart.toString();
+    return CartList;
+}
+
+public void RemoveItemFromCart(int ProductID) {
+    Cart.remove(ProductID);
+}
+    
+public String BuyItemsInCart(){
+    Cart.clear();
+    return "Your cart has been ordered! Thank you for shopping with us!";
+}
+    
    
 }
