@@ -153,7 +153,7 @@ public class ProductManager {
         return ProductList;
     }
 
-public boolean AddToCart(String ProductID) {
+public boolean AddToCart(int ProductID) {
     boolean ProductAdded = false;
     for (Product ProductDetails: ProductCatalog) {
         if (ProductDetails instanceof RefurbishedProduct) {
