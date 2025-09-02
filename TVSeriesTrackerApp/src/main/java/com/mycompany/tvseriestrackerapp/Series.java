@@ -11,201 +11,134 @@ package com.mycompany.tvseriestrackerapp;
 import java.util.*;
 
 public class Series {
-    //Scanner UserInput = new Scanner(System.in);
 
+    // List to store all TV series entries
     private ArrayList<SeriesModel> TVSeriesList = new ArrayList<>();
-    
-    
+
+    /**
+     * Validates the age restriction for a series.
+     * Only allows ages between 2 and 18 (inclusive).
+     */
     public boolean ValidateAge(int Age){
-        boolean AgeValid;                          
-        if (Age >= 2 && Age<=18) {
-            AgeValid=true;
-            } else {
-                AgeValid=false;
-            }
-        return AgeValid;  
-    }
-    
-    public boolean CaptureSeries(String ID, String Name, int Age, String Episodes){
-        //SeriesModel NewSeries = new SeriesModel(SeriesId, SeriesName, SeriesAge, SeriesNumberOfEpisodes);
-        boolean SeriesAdded = false;
-            if (!ValidateAge(Age)) {
-                SeriesAdded=false;
-            } else {
-                SeriesModel newSeries = new SeriesModel(ID, Name, String.valueOf(Age), Episodes);
-                TVSeriesList.add(newSeries);
-                SeriesAdded=true;
-            }  
-        return SeriesAdded;
-        
-        /*System.out.print("Enter the series id: ");
-        SeriesId=UserInput.next();
-        
-        UserInput.nextLine();
-        
-        System.out.print("Enter the series name: ");
-        SeriesName=UserInput.nextLine();
-       
-        System.out.print("Enter the series age restriction: "); 
-        boolean AgeValid =false;
-        while (AgeValid == false) {           
-            if (UserInput.hasNextInt() == true) {
-                int Age = UserInput.nextInt();
-                UserInput.nextLine();
-                if (ValidateAge(Age) == true) {
-                    SeriesAge=String.valueOf(Age);
-                    AgeValid=true;
-                } else {
-                    System.out.println("You have entered a incorrect series age!!!");
-                    System.out.print("Please re-enter the series age >> ");
-                }
-            } else { 
-               System.out.println("You have entered a incorrect series age!!!");
-               UserInput.nextLine();
-               System.out.print("Please re-enter the series age >> ");
-            }   
+        boolean AgeValid;
+        if (Age >= 2 && Age <= 18) {
+            AgeValid = true;
+        } else {
+            AgeValid = false;
         }
-        
-        System.out.print("Enter the number of episodes for " + SeriesName +": ");
-        SeriesNumberOfEpisodes=UserInput.next();
-        
-        
-        System.out.println("Series processed successfully!!!");
-        NewSeries.SeriesId=this.SeriesId;
-        NewSeries.SeriesName=this.SeriesName;
-        NewSeries.SeriesAge=this.SeriesAge;
-        NewSeries.SeriesNumberOfEpisodes=this.SeriesNumberOfEpisodes;
-        TVSeriesList.add(NewSeries);*/
+        return AgeValid;
     }
-    
+
+    /**
+     * Captures and adds a new series to the list.
+     * Returns true if the series was successfully added.
+     */
+    public boolean CaptureSeries(String ID, String Name, int Age, String Episodes){
+        boolean SeriesAdded = false;
+        if (!ValidateAge(Age)) {
+            SeriesAdded = false; // Invalid age, do not add
+        } else {
+            // Create new SeriesModel object and add to list
+            SeriesModel newSeries = new SeriesModel(ID, Name, String.valueOf(Age), Episodes);
+            TVSeriesList.add(newSeries);
+            SeriesAdded = true;
+        }
+        return SeriesAdded;
+    }
+
+    /**
+     * Searches for a series by its ID.
+     * Returns a formatted string with series details or a not-found message.
+     */
     public String SearchSeries(String SearchSeriesID) {
         StringBuilder SeriesSearch = new StringBuilder();
         String SearchSeries;
-        
+
         SeriesSearch.append("----------------------------");
-        
+
         boolean SeriesIDFound = false;
-        
+
+        // Loop through the list to find matching series ID
         for (SeriesModel s : TVSeriesList) {
             if (s.SeriesId.equalsIgnoreCase(SearchSeriesID)) {
+                // Append series details to output
                 SeriesSearch.append("\nSERIES ID: " + s.SeriesId);
                 SeriesSearch.append("\nSERIES NAME: " + s.SeriesName);
                 SeriesSearch.append("\nSERIES AGE RESTRICTION: " + s.SeriesAge);
                 SeriesSearch.append("\nSERIES NUMBER OF EPISODES: " + s.SeriesNumberOfEpisodes);
-                SeriesIDFound=true;
+                SeriesIDFound = true;
                 break;
             }
         }
-        if (SeriesIDFound==false) {
+
+        // If not found, show error message
+        if (!SeriesIDFound) {
             SeriesSearch.append("\nSeries with Series Id: " + SearchSeriesID + " was not found!");
         }
+
         SeriesSearch.append("\n----------------------------");
-        
         SearchSeries = SeriesSearch.toString();
         return SearchSeries;
     }
-    
+
+    /**
+     * Updates an existing series with new details.
+     * Returns true if the update was successful.
+     */
     public boolean UpdateSeries(String UpdateSeriesID, String NewSeriesName, int NewAge, String NewNumberOfEpisodes) {
         boolean SeriesUpdated = false;
+
+        // Loop through the list to find matching series ID
         for (SeriesModel s : TVSeriesList) {
             if (s.SeriesId.equalsIgnoreCase(UpdateSeriesID)) {
+                // Validate new age before updating
                 if (!ValidateAge(NewAge)) {
-                    SeriesUpdated=false;
+                    SeriesUpdated = false;
                     break;
                 } else {
-                s.SeriesName = NewSeriesName;
-                s.SeriesAge = String.valueOf(NewAge);
-                s.SeriesNumberOfEpisodes = NewNumberOfEpisodes;
-                SeriesUpdated = true;
+                    // Update series details
+                    s.SeriesName = NewSeriesName;
+                    s.SeriesAge = String.valueOf(NewAge);
+                    s.SeriesNumberOfEpisodes = NewNumberOfEpisodes;
+                    SeriesUpdated = true;
                 }
             }
         }
         return SeriesUpdated;
-        
-        /*System.out.print("Enter the series id to update: ");
-        String UpdateSeriesID = UserInput.next();
-        
-        boolean SeriesIDFound = false;
-        
-        for (SeriesModel s : TVSeriesList) {
-            if (s.SeriesId.equalsIgnoreCase(UpdateSeriesID) == true) {
-                SeriesIDFound = true;
-                
-                System.out.print("Enter the series name: ");
-                s.SeriesName=UserInput.next();
-                UserInput.nextLine();
-                System.out.print("Enter the age restriction: ");
-                boolean AgeValid =false;
-                while (AgeValid == false) {           
-                    if (UserInput.hasNextInt() == true) {
-                        int Age = UserInput.nextInt();
-                        UserInput.nextLine();
-                        if (ValidateAge(Age) == true) {
-                            s.SeriesAge=String.valueOf(Age);
-                            AgeValid=true;
-                        } else {
-                            System.out.println("You have entered a incorrect series age!");
-                            System.out.print("Please re-enter the series age >> ");
-                        }
-                    } else { 
-                        System.out.println("You have entered a incorrect series age!");
-                        UserInput.nextLine();
-                        System.out.print("Please re-enter the series age >> ");
-                    }   
-                }
-                
-                System.out.print("Enter the number of episodes: ");
-                s.SeriesNumberOfEpisodes=UserInput.next();
-            }
-        }
-        if (SeriesIDFound==false){
-            System.out.println("Series with series id: " + UpdateSeriesID + " was not found!");
-        }*/
     }
-    
+
+    /**
+     * Deletes a series from the list based on its ID.
+     * Returns true if the series was successfully deleted.
+     */
     public boolean DeleteSeries(String DeleteSeriesID){
         boolean SeriesDeleted = false;
+
+        // Loop through the list to find and remove matching series
         for (SeriesModel s : TVSeriesList) {
             if (s.SeriesId.equalsIgnoreCase(DeleteSeriesID)) {
                 TVSeriesList.remove(s);
-                SeriesDeleted=true;
+                SeriesDeleted = true;
                 break;
             }
-        }    
+        }
         return SeriesDeleted;
-        /*System.out.print("Enter the series id to delete: ");
-        String DeleteSeriesID = UserInput.next();
-        System.out.println("Are you sure you want to delete series " + DeleteSeriesID + " from the system? Yes (y) to delete.");
-        String ConfirmationDelete = UserInput.next();
-        char confirmationDelete = ConfirmationDelete.charAt(0);
-        
-        boolean SeriesToDeleteFound = false;
-        
-        
-        if (confirmationDelete == 'y' || confirmationDelete == 'Y') {
-            for (SeriesModel s : TVSeriesList) {
-                if (s.SeriesId.equalsIgnoreCase(DeleteSeriesID) == true) {
-                    TVSeriesList.remove(s);
-                    System.out.println("Series with Series Id: " + DeleteSeriesID + " WAS deleted!");
-                    SeriesToDeleteFound=true;
-                    break;
-                }
-            }
-            if (SeriesToDeleteFound == false) {
-                System.out.println("No series found with the ID: " + DeleteSeriesID);
-            }
-        } else {
-            System.out.println("Series deletion cancelled.");
-        }*/
     }
-    
+
+    /**
+     * Generates a report of all stored series.
+     * Returns a formatted string with all series details.
+     */
     public String SeriesReport() {
-        StringBuilder  SeriesReport = new StringBuilder();
+        StringBuilder SeriesReport = new StringBuilder();
         String seriesReport = null;
-        if (TVSeriesList.isEmpty() == true) {
+
+        // Check if list is empty
+        if (TVSeriesList.isEmpty()) {
             SeriesReport.append("No series is currently stored.");
         } else {
-            int i=0;
+            int i = 0;
+            // Loop through each series and append its details
             for (SeriesModel s : TVSeriesList) {
                 i++;
                 SeriesReport.append("\nSeries " + i);
@@ -217,10 +150,14 @@ public class Series {
                 SeriesReport.append("\n-----------------------------");
             }
         }
+
         seriesReport = SeriesReport.toString();
         return seriesReport;
     }
-    
+
+    /**
+     * Exits the application gracefully.
+     */
     public void ExitSeriesApplication() {
         System.out.println("Closing the application");
         System.exit(0);

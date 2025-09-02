@@ -20,10 +20,12 @@ public class Product {
         ProductName=productName;
         ProductCategory=productCategory;
         ProductPrice=productPrice;
-        EnvironmentalScore=EnvironmentalScore;
+        this.EnvironmentalScore=environmentalScore;
     }
     
-    
+    public void setProductID(int ProductID) {
+        this.ProductID = ProductID;
+    }
     public void setProductName(String ProductName) { //Mutator for ProductName variable
         this.ProductName=ProductName;
     }
