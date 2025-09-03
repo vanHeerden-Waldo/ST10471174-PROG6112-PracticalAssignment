@@ -23,7 +23,7 @@ public class Product {
         this.EnvironmentalScore=environmentalScore;
     }
     
-    public void setProductID(int ProductID) {
+    public void setProductID(int ProductID) { //Mutator for ProductID variable
         this.ProductID = ProductID;
     }
     public void setProductName(String ProductName) { //Mutator for ProductName variable
@@ -38,7 +38,7 @@ public class Product {
         this.ProductPrice=ProductPrice;
     }
     
-    public void setEnvironmentalScore(int EnvironmentalScore){
+    public void setEnvironmentalScore(int EnvironmentalScore){ //Mutator for EnvironmentalScore variable
         this.EnvironmentalScore=EnvironmentalScore;
     }
     
@@ -46,23 +46,23 @@ public class Product {
         return ProductID;
     }
     
-    public String getProductName(){
+    public String getProductName(){ //Accessor for ProductName variable
         return ProductName;
     }
     
-    public String getProductCategory(){
+    public String getProductCategory(){ //Accessor for ProductCategory variable
         return ProductCategory;
     }
     
-    public double getProductPrice(){
+    public double getProductPrice(){ //Accessor for ProductPrice variable
         return ProductPrice;
     }
     
-    public int getEnvironmentalScore(){
+    public int getEnvironmentalScore(){ //Accessor for EnvironmentalScore variable
         return EnvironmentalScore;
     }
     
-    public String DisplayProductDetails() {
+    public String DisplayProductDetails() { //Method to print the details of the product stored in the relevant variables and then returns a string
         StringBuilder ProductInfo = new StringBuilder();
         String ProductDetails = null;
         
