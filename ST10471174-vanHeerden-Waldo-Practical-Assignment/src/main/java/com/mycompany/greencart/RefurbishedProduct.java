@@ -12,30 +12,30 @@ public class RefurbishedProduct extends Product {
     private int ProductAge;
     private char ProductQuality;
     
-    public RefurbishedProduct(int productID, String productName, String productCategory, double productPrice, int environmentalScore, int productAge, char productQuality) {
+    public RefurbishedProduct(int productID, String productName, String productCategory, double productPrice, int environmentalScore, int productAge, char productQuality) { //Constructor method for the class
         super(productID, productName, productCategory, productPrice, environmentalScore);
         ProductAge=productAge;
         ProductQuality=productQuality;
     }
     
-    public void setProductAge(int ProductAge){
+    public void setProductAge(int ProductAge){ //Mutator for ProductAge variable
         this.ProductAge=ProductAge;
     }
     
-    public void setProductQuality(char ProductQuality){
+    public void setProductQuality(char ProductQuality){ //Mutator for ProductQuality variable
         this.ProductQuality=ProductQuality;
     }
     
-    public int getProductAge(){
+    public int getProductAge(){ //Accessor for ProductAge variable
         return ProductAge;
     }
     
-    public char getProductQuality(){
+    public char getProductQuality(){ //Accessor for ProductQuality variable
         return ProductQuality;
     }
    
     @Override
-    public String DisplayProductDetails(){
+    public String DisplayProductDetails(){ //This method returns all the details of the product if it was stored as a refurbished product
         StringBuilder ProductInfo = new StringBuilder();
         String ProductDetails = null;
         
