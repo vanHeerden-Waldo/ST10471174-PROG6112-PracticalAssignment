@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.tvseriestrackerapp;
+package TVSeriesTrackerApp;
 import java.util.Scanner;
 /**
  *
  * @author lab_services_student
  */
-public class TVSeriesTrackerApp {
+public class TVSeriesTrackerApp_MainMethod {
 
     public static void main(String[] args) {
         // Declare variables to store series details
