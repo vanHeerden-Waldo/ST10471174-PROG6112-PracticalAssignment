@@ -327,7 +327,7 @@ public class GreenCart {
                     int RemoveFromCartProductID = 0;
                     while (RemoveFromCartProductIDValid==false) {
                         if (UserInput.hasNextInt() == true) {
-                            RemoveFromCartProductID = UserInput.nextInt();
+                            RemoveFromCartProductID = UserInput.nextInt()-1;
                             RemoveFromCartProductIDValid=true;
                         } else {
                             System.out.print("The ID of the product you wanted to update for is invalid. Please type in a number: ");
